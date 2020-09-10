@@ -16,12 +16,20 @@ function templateHandler(v) {
   }
   if (langMode.toLowerCase() === "html") {
     templateText = v.childNodes.toString();
+    templateText = templateText.replace(/&quot;/gi, '"');
+    templateText = templateText.replace(/a-_-a/gi, '@')
+    templateText = templateText.replace(/dot-_-dot/gi, ':')
+    templateText = templateText.replace(/v-else="v-else"/gi, 'v-else')
+    templateText += "\r\n";
   } else if (langMode.toLowerCase() === "pug") {
     templateText = pug.render(v.childNodes.toString(), {
       pretty: true,
       doctype: "html",
     });
     templateText = templateText.replace(/&quot;/gi, '"');
+    templateText = templateText.replace(/a-_-a/gi, '@')
+    templateText = templateText.replace(/dot-_-dot/gi, ':')
+    templateText = templateText.replace(/v-else="v-else"/gi, 'v-else')
     templateText += "\r\n";
   }
   //div / li / ul 标签转换为 view

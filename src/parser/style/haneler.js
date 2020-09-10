@@ -8,7 +8,7 @@ const utils = require("../../utils/utils.js");
  */
 function handleRem(styleText) {
   const remTransPx = styleText.replace(/([\d|\.]+)(rem)/gi, (rs, $1, $2) => {
-    return Number($1) * 200 + "px";
+    return Math.floor(Number($1) * 200) + "px";
   });
   return remTransPx;
 }
@@ -22,7 +22,7 @@ function handlePxUnit(styleText) {
     if (Number($1) === 1) {
       return "1px";
     } else {
-      return Number($1) * 2 + $2;
+      return Math.floor(Number($1) * 2) + $2;
     }
   });
   return pxTransPx;
